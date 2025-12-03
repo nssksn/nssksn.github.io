@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillPort - 制作物発表会</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            font-size: 1.3em;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(transparent 60%, #ffeb3b 60%);
+            padding: 2px 4px;
+            font-weight: bold;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .team-member {
+            background: #ecf0f1;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .demo-placeholder {
+            background: #3498db;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            background: #e8f4fd;
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #3498db;
+            font-weight: bold;
+        }
+
+        .timeline {
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            padding: 15px 0;
+            border-left: 3px solid #3498db;
+            padding-left: 30px;
+            margin-left: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .concept-box h1 {
+            color: white;
+            border: none;
+            font-size: 2.5em;
+        }
+
+        .app-purpose {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .app-purpose p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .section-divider {
+            text-align: center;
+            font-size: 2em;
+            color: #3498db;
+            margin: 20px 0;
+        }
+
+        .sales-message {
+            background: #d4edda;
+            padding: 30px;
+            border-radius: 10px;
+            border: 3px solid #28a745;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .implementation-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- スライド1: タイトル -->
+        <div class="slide active">
+            <h1>SkillPort</h1>
+            <div class="subtitle">制作物管理アプリ開発プロジェクト</div>
+            <div class="content" style="text-align: center;">
+                <p style="font-size: 1.1em; margin-top: 40px;">
+                    開発チーム：南・志摩・清水・黒田<br>
+                    発表日：2025年9月26日
+                </p>
+            </div>
+        </div>
+
+        <!-- スライド2: なぜ作ったのか -->
+        <div class="slide">
+            <h2>なぜ作ったのか？</h2>
+            <div class="content">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>利用者の課題</h4>
+                        <p>デザイン、プログラミング、動画編集を学んだ先に<span class="highlight">どんなことができるのかわからない</span></p>
+                        <p>他の人がどんなことに取り組んでいるのかがわからない</p>
+                        <p>今までどんな制作物があったのかを気軽に確認できない</p>
+                        <p><span class="highlight">未経験で自分もできるのかどうか不安</span></p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>施設での課題</h4>
+                        <p>制作物発表会は<span class="highlight">半年に一回しかなく、頻度が多くない</span></p>
+                        <p>スタッフが、利用者が何をやっているのかを<span class="highlight">瞬時に理解できない</span></p>
+                    </div>
+                </div>
+                
+                <div class="section-divider">⬇</div>
+                
+                <h2 style="color: #e74c3c; margin: 20px 0; text-align: center;">アプリの趣旨</h2>
+                <div class="app-purpose">
+                    <p>✅ <strong>誰でもITスクールで取り組んできたことを一目でわかるようにしたい</strong></p>
+                    <p>✅ 通っていた人がどんなことをやってきたのかを知ることで<span class="highlight">未経験でもここまでできる自信</span>をつけてほしい</p>
+                    <p>✅ 制作物を見ることで、その学習に<span class="highlight">興味を持って取り組む機会</span>を作りたい</p>
+                    <p>✅ この制作物をきっかけに<span class="highlight">利用者間のコミュニケーション</span>につなげたい</p>
+                    <p>✅ スタッフが利用者の制作物を把握し、<span class="highlight">利用者サポート</span>に役立ててほしい</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド3: アプリコンセプト・システム概要 -->
+        <div class="slide">
+            <h2>アプリコンセプト</h2>
+            <div class="content">
+                <div class="concept-box">
+                    <h1>制作物を共有して<br>学習のモチベーションや可能性を広げる</h1>
+                </div>
+                
+                <div style="text-align: center; margin: 40px 0;">
+                    <h3 style="color: #3498db;">「スキルの港」「出発点」 → Skill Port</h3>
+                </div>
+                
+                <div style="border: 3px solid #3498db; padding: 30px; border-radius: 10px; background: #f8f9fa;">
+                    <h3 style="margin-bottom: 30px; text-align: center;">ITスクールの制作物管理システム</h3>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>利用者ができること</h4>
+                            <ul>
+                                <li>制作物の投稿・管理</li>
+                                <li>他の人の作品を見る</li>
+                                <li>自分の成長を記録</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4>スタッフができること</h4>
+                            <ul>
+                                <li>利用者情報の管理</li>
+                                <li>制作物の確認・管理</li>
+                                <li>利用者のサポート</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tech-stack">
+                        <div class="tech-item">Laravel</div>
+                        <div class="tech-item">Laravel Breeze</div>
+                        <div class="tech-item">PHP</div>
+                        <div class="tech-item">Blade</div>
+                        <div class="tech-item">MySQL</div>
+                        <div class="tech-item">TailwindCSS</div>
+                        <div class="tech-item">HTML/CSS</div>
+                        <div class="tech-item">JavaScript</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド4: システム実演 -->
+        <div class="slide">
+            <h2>完成した機能の実演</h2>
+            <div class="content">
+                <div class="demo-placeholder">
+                    【実際の画面デモ】<br>
+                    制作物機能をメインにお見せします<br>
+                    ※ここで実際にブラウザでシステムを操作して見せる
+                </div>
+                
+                <!-- 制作物機能をメインに大きく表示 -->
+                <div style="border: 3px solid #3498db; padding: 30px; border-radius: 10px; background: #f8f9fa; margin: 30px 0;">
+                    <h3 style="text-align: center; color: #3498db; margin-bottom: 25px;">メイン機能：制作物管理</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>制作物一覧表示</h4>
+                            <p>すべての制作物をカード形式で表示</p>
+                            <p>見やすく整理された画面レイアウト</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>カテゴリ別分類</h4>
+                            <p>Webアプリ、デザイン、動画編集など</p>
+                            <p>学習分野ごとに制作物を整理</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>検索機能</h4>
+                            <p>タイトルや内容での検索</p>
+                            <p>欲しい制作物をすぐに見つけられる</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>詳細表示</h4>
+                            <p>制作物の詳しい説明と画像</p>
+                            <p>制作者の学習過程も確認可能</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- その他の機能を小さく表示 -->
+                <h4 style="color: #7f8c8d; margin-top: 30px;">その他の管理機能</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px;">
+                    <div style="background: #ecf0f1; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>利用者管理</strong><br>
+                        <small>一覧・詳細・編集・登録</small>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>スタッフ管理</strong><br>
+                        <small>一覧・権限管理</small>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>認証システム</strong><br>
+                        <small>ログイン・アクセス制御</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド5: チームメンバーの取り組み -->
+        <div class="slide">
+            <h2>チームメンバーの取り組み</h2>
+            <div class="content">
+                <div class="implementation-grid">
+                    <div class="implementation-section">
+                        <h3 style="color: #2c3e50;">仕様編</h3>
+                        <ul>
+                            <li><strong>要件定義書の作成</strong></li>
+                            <li><strong>画面一覧の作成</strong></li>
+                            <li><strong>機能要件の作成</strong></li>
+                            <li><strong>データテーブルの作成</strong></li>
+                            <li><strong>画面遷移図の作成</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="implementation-section">
+                        <h3 style="color: #2c3e50;">実装編</h3>
+                        <ul>
+                            <li><strong>UI/UXデザイン</strong> - 南担当</li>
+                            <li><strong>制作物機能構築</strong> - 志摩担当</li>
+                            <li><strong>データベース構築</strong> - 清水担当</li>
+                            <li><strong>管理機能構築</strong> - 黒田担当</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content" style="text-align: center; margin-top: 40px;">
+                    <p style="font-size: 1.3em;">設計から実装まで、<span class="highlight">チーム一丸となって</span>取り組みました</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- スライド6: まとめ -->
+        <div class="slide">
+            <h2>まとめ</h2>
+            <div class="content" style="text-align: center;">
+                <h3>SkillPort プロジェクトを通じて</h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>技術的な成長</h4>
+                        <p>Laravel でのWeb開発</p>
+                        <p>データベース設計</p>
+                        <p>チーム開発の実践</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>チームワーク</h4>
+                        <p>役割分担と連携</p>
+                        <p>Git を使った共同作業</p>
+                        <p>問題解決の協力</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 50px;">
+                    <h3>「作る楽しさ」と「使ってもらう喜び」</h3>
+                    <p style="font-size: 1.2em; margin-top: 30px;">
+                        まだまだ発展途上ですが、<br>
+                        <span class="highlight">実際に使ってもらえるシステム</span>を目指して<br>
+                        チーム一丸となって開発を続けています
+                    </p>
+                </div>
+                
+                <div class="sales-message">
+                    <h3 style="color: #28a745; margin-bottom: 20px;">完成した際には、ぜひ使ってください！</h3>
+                    <p style="font-size: 1.2em; margin: 0;">利用者の皆さんの成長と就職活動をサポートできるシステムへ</p>
+                </div>
+                
+                <div style="margin-top: 40px; font-size: 1.1em; color: #7f8c8d;">
+                    ご清聴ありがとうございました
+                </div>
+            </div>
+        </div>
+
+        <!-- バックアップスライド1: 制作の詳細 -->
+        <div class="slide">
+            <h2>制作の詳細</h2>
+            <div class="content">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>検索機能ひとつでも...</h4>
+                        <p>日本語の部分一致検索</p>
+                        <p>スペースの処理</p>
+                        <p>パフォーマンスの考慮</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>チーム開発の課題</h4>
+                        <p>コードの統一性の確保</p>
+                        <p>機能間の連携</p>
+                        <p>Git を使った共同作業</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>デザインと機能の両立</h4>
+                        <p>見た目と使いやすさのバランス</p>
+                        <p>レスポンシブ対応</p>
+                        <p>統一感のあるデザイン</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>データベース設計</h4>
+                        <p>将来の拡張を考慮した設計</p>
+                        <p>データの整合性確保</p>
+                        <p>パフォーマンスの最適化</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- バックアップスライド2: これからの展望 -->
+        <div class="slide">
+            <h2>これからの展望</h2>
+            <div class="content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>短期的な目標</h4>
+                        <p>制作物投稿機能の完成</p>
+                        <p>削除機能の実装</p>
+                        <p>システム全体のテスト</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>中期的な目標</h4>
+                        <p>AWSでの本格運用</p>
+                        <p>実際の事業所での導入</p>
+                        <p>利用者の就職活動での活用</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>長期的な目標</h4>
+                        <p>利用者向け機能の充実</p>
+                        <p>カリキュラム管理機能</p>
+                        <p>利用者の成長記録機能</p>
+                    </div>
+                </div>
+                
+                <div class="content" style="text-align: center; margin-top: 40px;">
+                    <h3>目指すは <span class="highlight">「本当に使われるシステム」</span></h3>
+                    <p>利用者の皆さんの成長と就職活動をサポートできるシステムへ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ナビゲーション -->
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">9</span>
+    </div>
+    
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()" disabled>前へ</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">次へ</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = 6; // メイン発表用のスライド数
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // ボタンの状態更新
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+    </script>
+</body>
+</html>

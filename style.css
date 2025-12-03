@@ -1,0 +1,670 @@
+/*リセットCSS*/
+/*
+  Made by Elly Loel - https://ellyloel.com/
+*/
+*{margin:0;padding:0;line-height:calc(0.25rem+1em+0.25rem)}*,::before,::after{box-sizing:border-box}*:where(:not(fieldset,progress,meter)){border-width:0;border-style:solid;background-origin:border-box;background-repeat:no-repeat}
+html{block-size:100%;-webkit-text-size-adjust:none}
+@media(prefers-reduced-motion:no-preference){html:focus-within{scroll-behavior:smooth}}
+body{text-rendering:optimizeSpeed;min-block-size:100%}:where(img,svg,video,canvas,audio,iframe,embed,object){display:block}:where(img,svg,video){block-size:auto;max-inline-size:100%}:where(svg){stroke:none;fill:currentColor}:where(svg):where(:not([fill])){stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round}:where(svg):where(:not([width])){inline-size:5rem}:where(input,button,textarea,select),:where(input[type="file"])::-webkit-file-upload-button{color:inherit;font:inherit;font-size:inherit;letter-spacing:inherit;word-spacing:inherit}:where(textarea){resize:vertical}
+@supports(resize:block){:where(textarea){resize:block}}:where(p,h1,h2,h3,h4,h5,h6){overflow-wrap:break-word}
+h1{font-size:2em}:where(ul,ol){list-style-position:inside}:where(ul,ol)[role="list"]{list-style:none}
+a:not([class]){text-decoration-skip-ink:auto}:where(a[href],area,button,input,label[for],select,summary,textarea,[tabindex]:not([tabindex*="-"])){cursor:pointer;touch-action:manipulation}:where(input[type="file"]){cursor:auto}:where(input[type="file"])::-webkit-file-upload-button,:where(input[type="file"])::file-selector-button{cursor:pointer}
+@media(prefers-reduced-motion:no-preference){:focus-visible{transition:outline-offset 145ms cubic-bezier(0.25,0,0.4,1)}:where(:not(:active)):focus-visible{transition-duration:0.25s}}:where(:not(:active)):focus-visible{outline-offset:5px}:where(button,button[type],input[type="button"],input[type="submit"],input[type="reset"]),:where(input[type="file"])::-webkit-file-upload-button,:where(input[type="file"])::file-selector-button{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none;text-align:center}:where(button,button[type],input[type="button"],input[type="submit"],input[type="reset"])[disabled]{cursor:not-allowed}
+
+/*全体*/
+.body{
+    background-color:0A1524;
+}
+.wrap{
+    max-width:1020px;
+}
+
+.wrapper{
+    width:95%;
+}
+
+.radial-gradient {
+    background: radial-gradient(red 10px, yellow 30%, #1e90ff 50%);
+  }
+
+.section_title{
+    text-align:center;
+    font-weight:bold;
+    font-size:40px;
+    padding-top:70px;
+    margin-bottom:48px;
+}
+
+.btn_more{
+    padding:8px 16px;
+    background-color:#0A1524;
+    font-size:20px;
+    font-weight:bold;
+    color:white;
+    text-decoration:none;
+}
+
+
+/*----------------------------------
+トップページ
+-----------------------------------*/
+
+/*header*/
+header{
+    background-color:#0A1524;
+    color:white;
+    border-bottom:1px solid white;
+}
+
+header .wrapper{
+    max-width:1440px;
+    margin:0 auto;
+    padding:32px 32px 32px 32px;
+    display:flex;
+    justify-content:space-between;
+}
+
+header .brand{
+    font-size:24px;
+}
+
+header nav{
+    font-size:16px;
+}
+
+header nav a{
+    font-weight:bold;
+    text-decoration:none;
+    color:white;
+    margin-right:100px;
+}
+
+/*mainvisual*/
+.mainvisual{
+    padding:32px;
+    background-color:#0A1524;
+    color:white;
+}
+
+.mainvisual .whitebox{
+    border:1px solid white;
+    border-radius:8px;
+    height:512px;
+}
+
+.mainvisual .whitebox .wrap{
+    position:relative;
+    height:100%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.mainvisual .bg-image{
+    position:absolute;
+    right:0px;
+    top:0px;
+    width:760px;
+    height:100%;
+   /* 背景画像 + グラデーションを重ねる */
+   background:
+   radial-gradient(
+       circle at center,
+       rgba(10, 21, 36, 0) 0%,       /* 真ん中を透明に */
+       rgba(10, 21, 36, 0.3) 40%,   /* 少し暗く */
+       rgba(10, 21, 36, 0.9) 70%,   /* だいぶ暗く */
+       rgba(10, 21, 36, 1) 100%     /* 端は背景色と同じ色に溶け込む */
+   ),
+   url("image/mainvisual.png");
+
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    pointer-events: none;
+} 
+
+.mainvisual .mainvisual-left{
+    max-width:620px;
+    z-index:2;
+    position:absolute;
+    left:0px;
+    bottom:70px;
+}
+
+.mainvisual .mainvisual-left h1{
+    font-size:36px;
+    font-weight:bold;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    margin-bottom:16px;
+}
+
+.mainvisual .mainvisual-left li{
+    font-size:20px;
+    line-height:140%;
+    font-weight:normal;
+    list-style:none;
+}
+
+/*About Me*/
+.about_me{
+     background-color:#0A1524;
+     color:white;
+     padding-bottom:48px;
+}
+
+.avater{
+    background-image:url(image/about_me.png);
+    height:263px;
+    width:263px;
+    border-radius:50%;
+    margin-right:92px;
+}
+
+.about_card{
+    margin-right:auto;
+    margin-left:auto;
+    padding:74px 0px;
+    display:flex;
+    justify-content:center;
+    background-color:white;
+    color:black;
+    border-radius:16px;
+}
+
+.about_text h3{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:16px;
+}
+
+.about_text p{
+    width:532px;
+    font-size:20px;
+    font-weight:normal;
+    line-height:24px;
+    margin-bottom:26px;
+}
+
+/*work*/
+.work{
+    padding-bottom:48px;
+}
+
+.work .section_title{
+    color:black;
+}
+
+.work_grid{
+    margin-right:auto;
+    margin-left:auto;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:22px;
+    margin-top:12px;
+}
+
+.work_item{
+    display:block;
+    width:100%;
+    background:#fff;
+    color:#0b1216;
+    border-radius:8px;
+    border:1px solid #0b1216;
+    text-decoration:none;
+}
+
+.work_item .text{
+    padding:24px 16px;
+}
+
+.work_item .text h3{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.work_item .text p{
+    font-size:16px;
+    font-weight:normal;
+    color:#6b7276;
+}
+
+.work_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:#f6f7f8;
+    width:100%;
+    padding:40px;
+    border-radius:8px 8px 0px 0px;
+}
+
+    
+    
+
+.work_image img{
+    height:300px;
+    width:auto;
+}
+/*skill*/
+.skill_area{
+    background-color:#f2f4f6;
+    color:#0b1216;
+    padding:40px;
+    border-radius:6px;
+}
+
+.skills{
+    margin-right:auto;
+    margin-left:auto;
+    display:flex;
+    gap:22px;
+    justify-content:center;
+}
+
+.card h4{
+    display:inline-block;
+    padding:8px 16px;
+    font-size:12px;
+    color:white;
+    background-color:#0A1524;
+    border-radius:8px 8px 0px 0px;
+}
+
+.skill_card{
+    background:#fff;
+    border-radius:0 8px 8px 8px;
+    padding:18px;
+    width:220px;
+    border:1px solid #0A1524;
+}
+
+
+.progress{
+    background:rgba(0, 0, 0, 0.06);
+    height:10px;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.progress > div{
+    display:block;
+    height:100%;
+    background:linear-gradient(90deg,#25f0a3,#25f0a3);
+    border-radius:8px;
+
+}
+
+.skill-row{
+    margin-bottom:12px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+/*footer*/
+
+footer{
+
+    padding:32px 32px 32px 32px;
+    background-color:#0A1524;
+    color:white;
+}
+
+footer .wrapper{
+    display:flex;
+    justify-content:left;
+}
+
+footer .brand{
+    font-weight:bold;
+    font-size:14px;
+}
+
+footer small{
+    display:block;
+    text-align:center;
+    margin-top:12px;
+    opacity:0.8;
+}
+
+
+/*----------------------------------
+About Me
+-----------------------------------*/
+/*About Me*/
+.hero{
+    padding:60px 0 112px;
+    text-align:center;
+    background-color:#0A1524;
+}
+
+.hero h1{
+    color:white;
+    font-size:56px;
+    margin:6px 0 20px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.hero .avatar{
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:0 auto 58px;    
+}
+
+.hero .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.hero .wrap{
+    padding:32px;
+    margin:0 auto;
+    background-color:white;
+    border-radius:16px;
+    text-align:left;
+}
+
+
+.profile-card .section-title{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.muted{
+    font-size:13px;
+    line-height:1.6;
+}
+
+.muted strong{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.profile-right{
+    margin-top:22px;
+}
+
+/*Career*/
+
+.career-section{
+    background:#F4F5F7;
+    padding:80px 0
+}
+
+.career-inner{
+    max-width:800px;
+    margin:0 auto;
+    padding:10px 18px
+}
+/*
+.timeline{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:10px;
+    align-items:start
+}
+
+.timeline-line{
+    position:relative;
+    padding-top:6px;
+    height:100%;
+}
+
+.timeline-line::before{
+    content:"";
+    position:absolute;
+    left:38px;
+    top:6px;
+    height:100%;
+    width:4px;
+    background:#dfe7ea;
+    border-radius:4px;
+}
+
+.c_block{
+    position:relative;
+    display:flex;
+    align-items:flex-start;
+    gap:44px;
+
+}
+
+.c_block .marker{
+    margin-top:32px;
+    position:relative;
+    left:29px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f6f8f8;
+    border:4px solid #0A1524;
+    opacity:0.3;
+    z-index:3;
+}
+
+.timeline-cards{
+    padding-left:20px;
+}
+
+.c_card{
+    width:480px;
+    background:#fff;
+    border-radius:10px;
+    padding:18px;
+    margin:18px 0;
+    box-shadow:0 4px 4px rgba(0,0,0,0.25);
+}
+.c_card h4{
+    margin:0 0 6px;
+    font-size:15px;
+}
+.c_card .period{
+    font-size:12px;
+    color:#b33;
+}
+.c_card p{
+    margin:8px 0 0;
+    color:#4b5053;
+    font-size:13px;
+    line-height:1.6;
+}
+*/
+/* Career timeline */
+
+/* タイムライン全体 */
+.timeline {
+    margin:0 auto;
+    position: relative;
+    padding-left: 50px; /* 左にスペースを作り丸と線を置く */
+}
+
+/* 縦線 */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 98px;  /* 丸と同じ位置 */
+    width: 4px;
+    background: #dfe7ea;
+    border-radius: 4px;
+    z-index:2;
+}
+
+/* 各ブロック */
+.c_block {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+/* 丸（marker） */
+.c_block .marker {
+    position: absolute;
+    left: 50px;         /* 縦線と同じ位置に揃える */
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 4px solid #dfe7ea;
+    border-radius: 50%;
+    z-index:3;
+}
+
+/* カード本体 */
+.c_card {
+    margin-left: auto; /* 丸より右側に寄せる */
+    margin-right:auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width:480px;
+    border-radius:10px;
+    padding:18px;
+    box-shadow:0 4px 4px rgba(0,0,0,0.25);
+}
+.c_card h4{
+    margin:0 0 6px;
+    font-size:15px;
+}
+.c_card .period{
+    font-size:12px;
+    color:#b33;
+}
+.c_card p{
+    margin:8px 0 0;
+    color:#4b5053;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.timeline-cards{
+    margin:0 auto;
+}
+
+
+
+/*----------------------------------
+Work - detail
+-----------------------------------*/
+/*work-title*/
+.work-title{
+    margin:0 auto;
+    max-width:1020px;
+    padding:60px 0px;
+}
+
+.work-title .label{
+    display:inline-block;
+    border:5px solid #000;
+    border-radius:8px;
+    padding:8px 8px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.work-title .info{
+    float:right;
+  
+    text-align:right;
+    font-size:12px;
+    line-height:1.6;
+}
+
+/*mockup-wrapper*/
+.mockup-wrapper{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
+}
+
+.mockup{
+    background:#f6f7f8;
+    width:80%;
+    max-width:900px;
+    padding:40px;
+    border-radius:14px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.mockup img{
+    width:90%;
+    max-width:700px;
+}
+
+.mockup .voice_sns{
+    max-height:500px;
+    width:auto;
+}
+
+/*work-summary*/
+.work-summary{
+    max-width:1020px;
+    margin:0 auto;
+    padding:60px 40px;
+}
+.work-summary h2{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:26px;
+}
+
+.work-summary p{
+    font-size:14px;
+    line-height:1.9;
+    margin-bottom:16px;
+}
+
+.work-summary ul{
+    margin:16px 0 24px 20px;
+}
+
+.work-summary ul li{
+    font-size:14px;
+    margin-bottom:8px;
+    line-height:1.6;
+}
+
+/*work_image*/
+.scroll-gallery{
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #f5f5f5;
+    white-space: nowrap;
+  }
+  
+  /* Chrome / Edge */
+  .scroll-gallery::-webkit-scrollbar {
+    height: 10px;
+  }
+  .scroll-gallery::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+  }
+  .scroll-gallery::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 10px;
+  }
+  
+  /* 画像設定（縦長対応） */
+  .scroll-gallery img{
+    height: 500px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+  
+/*----------------------------------
+SkillPort
+-----------------------------------*/
+/*
